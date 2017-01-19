@@ -10,13 +10,18 @@ All rights reserved. Copyright Robert Roy 2016.
     margin:0;
     padding:0;
     color:black;
-    font-size:1.1em;
+    font-size:1em;
     font-family: Arial;
+}
+h2{
+    font-size: 2em;
+    color: #003399;
 }
 body, html{
     min-width:100%;
     min-height:100%;
     height:100%;
+    overflow-x:hidden;
 }
 #main{
     height:100%;
@@ -27,20 +32,53 @@ body, html{
     background: radial-gradient(#003399, #0066ff);
     text-align:center;
 }
+#loginbanner{
+    top:0;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+    position:absolute;
+    height:90px;
+    width:90px;
+    background-color:black;
+    border-radius:75px;
+    border: 5px #ffffff solid;
+}
 .contentdiv{
+    background: #fff;
     position:absolute;
     top:50%;
     left:50%;
     -webkit-transform:translate(-50%, -50%);
     transform:translate(-50%, -50%);
-    display:inline-block;
+    display:block;
+    min-width: 264px;
+    width:100%;
+    max-width: 400px;
     border:0px black solid;
     box-shadow: 1px 1px 50px #1e194a;
     border-radius:0px;
-    background: white;
-    background: white;
-    background: white;
-    background: white;
-    margin-left:auto;
-    margin-right:auto;
+    border-radius: 5px;
+    padding:20px;
+}
+input[type="text"]{
+    background: #fff;
+    border-radius:5px;
+    border:2px #444488 solid;
+    font-size:1em;
+    width:calc(100% - 30px);
+    margin-bottom:4px;
+    padding:10px;
+}
+input[type="submit"]{
+    background: #0066ff;
+    font-weight: bold;
+    font-size:1.2em;
+    border-radius:5px;
+    color:white;
+    margin-bottom:3px;
+    border:none;
+    padding:10px;
+    min-width:160px;
+    width:calc(100%);
 }
