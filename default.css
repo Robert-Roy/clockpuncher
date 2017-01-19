@@ -72,6 +72,7 @@ input[type="text"]{
 }
 input[type="submit"]{
     cursor: pointer;
+    cursor: hand;
     background: #0066ff;
     font-weight: bold;
     font-size:1.2em;
