@@ -7,7 +7,7 @@
 include_once 'sqlconnector.php';
 
 $SQLConn = new SQLConnector();
-$Conn = $SQLConn->conn;
+$Conn = $SQLConn->getConn();
 //Initialize SQL Tables
 try {
     $Conn->query("CREATE TABLE passwords ("
