@@ -12,7 +12,8 @@ $Conn = $SQLConn->getConn();
 try {
     $Conn->query("CREATE TABLE passwords ("
             . "userid TEXT, "
-            . "pw TEXT"
+            . "hash TEXT, "
+            . "salt TEXT "
             . ")");
 } catch (Exception $ex) {
     //Do nothing
