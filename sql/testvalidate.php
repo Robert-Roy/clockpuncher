@@ -8,29 +8,38 @@ include_once 'sqlconnector.php';
 
 $SQLConn = new SQLConnector();
 $Conn = $SQLConn->getConn();
-//Initialize SQL Tables
+
+//Sample user login to try
 $email = "test2@test.test";
 $password = "password";
 try {
+    //Check if email exists in users table, respond accordingly
     $statement4 = $Conn->prepare("SELECT COUNT(*) FROM users WHERE email = (?)");
     $statement4->execute([$email]);
     $count = $statement4->fetch(PDO::FETCH_NUM)[0];
-    if ($count === "0") {
-        $statement = $Conn->prepare("INSERT INTO users (email) VALUES (?)");
-        $statement->execute([$email]);
-        $statement2 = $Conn->prepare("SELECT * FROM users WHERE email = ?");
+    if ($count === "1") {
+        // get userid associated with email
+        $statement2 = $Conn->prepare("SELECT userid FROM users WHERE email = ?");
         $statement2->execute([$email]);
-        $row = $statement2->fetch(PDO::FETCH_ASSOC);
-        $userid = $row['userid'];
-        $salthash = password_hash($password, PASSWORD_DEFAULT);
-        $statement3 = $Conn->prepare("INSERT INTO passwords VALUES (?, ?)");
-        $statement3->execute([$userid, $salthash]);
-        echo "User Created";
-    }else{
-        echo "Not a unique email";
+        $userid = $statement2->fetch(PDO::FETCH_NUM)[0];
+        //get hashed pw associated with userid
+        $statement3 = $Conn->prepare("SELECT password FROM passwords WHERE userid = ?");
+        $statement3->execute([$userid]);
+        $salthash = $statement3->fetch(PDO::FETCH_NUM)[0];
+        //check that unhashed password matches hashed pw
+        $blnValid = password_verify($password, $salthash);
+        if($blnValid){
+            echo "Valid login";
+        }else{
+            echo "Invalid login";
+        }
+    } else if ($count !== "0") {
+        // The count should be 1 or 0. Anything else is very bad
+        echo "Something very, very wrong has happened";
+    } else {
+        "Invalid email";
     }
 } catch (Exception $ex) {
-    //Do nothing
     echo $ex;
 }
 ?>

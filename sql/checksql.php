@@ -5,9 +5,10 @@
  */
 include_once 'sqlconnector.php';
 
+//This page validates whether or not you can connect to your SQL server
 $SQLConn = new SQLConnector();
 if($SQLConn === false){
-    echo "It's broke"; // connection error of some kind
+    echo "You cannot currently connect to your SQL server"; // connection error of some kind
 }else{
     echo "Success";
 }
