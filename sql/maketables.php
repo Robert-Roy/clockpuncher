@@ -13,6 +13,7 @@ try {
     $Conn->query("CREATE TABLE passwords ("
             . "userid TEXT, "
             . "password TEXT"
+            . "PRIMARY KEY (userid)"
             . ")");
 } catch (Exception $ex) {
     //Do nothing
