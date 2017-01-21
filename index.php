@@ -9,12 +9,12 @@ include_once('header.php')
 <div class="contentdiv">
     <?php
     if (!empty($_POST['email']) && !empty($_POST['pw'])) {
+        //if login attempt
         include_once('sql/sqlutil.php');
         $SQLUtil = new SQLUtil();
         $email = $_POST['email'];
         $pw = $_POST['pw'];
         $blnValid = $SQLUtil->isValidLogin($email, $pw);
-        //if login attempt
         if ($blnValid) {
             echo "Valid Login";
         } else {
@@ -43,6 +43,7 @@ function showForm($message) {
         <input class="crispbutton" type="submit" value="Sign In">
         <?php
         if(!($message == "")){
+            // only print a message if there is one to print
             echo "<br><br>" . $message;
         }
         ?>
