@@ -15,6 +15,37 @@ class SQLUtil {
         $this->Conn = $SQLConn->getConn();
     }
 
+    public function addUser($email, $password) {
+        //Returns true, if success or false if failed
+        try {
+            // # of users with given email
+            $statement4 = $this->Conn->prepare("SELECT COUNT(*) FROM users WHERE email = (?)");
+            $statement4->execute([$email]);
+            $count = $statement4->fetch(PDO::FETCH_NUM)[0];
+            // Only want to add users if email is unique. Two users CANNOT have one email
+            if ($count === "0") {
+                // add user to users table
+                $statement = $this->Conn->prepare("INSERT INTO users (email) VALUES (?)");
+                $statement->execute([$email]);
+                // get userid from users table
+                $statement2 = $this->Conn->prepare("SELECT * FROM users WHERE email = ?");
+                $statement2->execute([$email]);
+                $row = $statement2->fetch(PDO::FETCH_ASSOC);
+                $userid = $row['userid'];
+                // turn raw password into securely hashed password
+                $salthash = password_hash($password, PASSWORD_DEFAULT);
+                // insert into passwords table with correlating userid
+                $statement3 = $this->Conn->prepare("INSERT INTO passwords VALUES (?, ?)");
+                $statement3->execute([$userid, $salthash]);
+                return true;
+            } else {
+                return false;
+            }
+        } catch (Exception $ex) {
+            return false;
+        }
+    }
+
     public function isValidLogin($email, $password) {
         try {
             //Check if email exists in users table, respond accordingly
@@ -44,5 +75,14 @@ class SQLUtil {
         }
     }
 
+    public function validConn() {
+        if ($this->Conn === false) {
+            return false;
+        } else {
+            return true;
+        }
+    }
+
 }
+
 ?>
