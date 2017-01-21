@@ -7,22 +7,48 @@ include_once('header.php')
 ?>
 
 <div class="contentdiv">
+    <?php
+    if (!empty($_POST['email']) && !empty($_POST['pw'])) {
+        include_once('sql/sqlutil.php');
+        $SQLUtil = new SQLUtil();
+        $email = $_POST['email'];
+        $pw = $_POST['pw'];
+        $blnValid = $SQLUtil->isValidLogin($email, $pw);
+        //if login attempt
+        if ($blnValid) {
+            echo "Valid Login";
+        } else {
+            echo showForm("Invalid Login. Please try again.");
+        }
+    } else if (false) {
+        // if already logged in
+    } else {
+        showForm("");
+    }
+    ?>
+
+</div>
+<?php
+
+function showForm($message) {
+    ?>
     <img id="loginbanner" src="img/sign.png"/>
     <br>
     <br>
     <br>
-    <form action="sendmail.php" method="post" onsubmit="return false;">
-        <!--label class="label" for="email">Email:</label>-->
-        
+    <form action="index.php" method="post" onsubmit="">
         <div><center><input type="text" name="email" autocomplete="email" placeholder="email address">
-                <!--label class="label"  for="pw">Password:</label>-->
-        <input type="text" name="pw" placeholder="password"></center><div>
+                <input type="text" name="pw" placeholder="password"></center></div>
         <br>
         <input class="crispbutton" type="submit" value="Sign In">
-        
+        <?php
+        if(!($message == "")){
+            echo "<br><br>" . $message;
+        }
+        ?>
     </form>
-</div>
+    <?php
+}
 
-<?php
 include_once('footer.php')
 ?>
