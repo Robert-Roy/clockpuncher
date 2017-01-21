@@ -8,7 +8,9 @@ include_once('header.php')
 
 <div class="contentdiv">
     <?php
-    if (!empty($_POST['email']) && !empty($_POST['pw'])) {
+    if (false){
+        //if already logged in
+    } else if (!empty($_POST['email']) && !empty($_POST['pw'])) {
         //if login attempt
         include_once('sql/sqlutil.php');
         $SQLUtil = new SQLUtil();
@@ -20,8 +22,6 @@ include_once('header.php')
         } else {
             echo showForm("Invalid Login. Please try again.");
         }
-    } else if (false) {
-        // if already logged in
     } else {
         showForm("");
     }
