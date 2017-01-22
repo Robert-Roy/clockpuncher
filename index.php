@@ -42,7 +42,7 @@ function showForm($message) {
         <br>
         <input class="crispbutton" type="submit" value="Sign In">
         <?php
-        if(!($message == "")){
+        if(!($message === "")){
             // only print a message if there is one to print
             echo "<br><br>" . $message;
         }

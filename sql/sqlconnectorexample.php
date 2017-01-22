@@ -15,9 +15,9 @@ class SQLConnector {
         try {
             $servername = "localhost";
             $username = "XXXXXXXXXXXX";
-            $porkchop = "XXXXXXXXXXXX";
+            $password = "XXXXXXXXXXXX";
             $dbname = "XXXXXXXXXXXXXX";
-            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $porkchop);
+            $conn = new PDO("mysql:host=$servername;dbname=$dbname", $username, $password);
             $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             return $conn;
         } catch (PDOException $e) {

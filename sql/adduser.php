@@ -10,7 +10,7 @@ include_once 'sqlutil.php';
 $SQLUtil = new SQLUtil();
 
 // Sample user info to be added to your database
-$email = "test3@test.test";
+$email = "test@test.test";
 $password = "password";
 $blnAdded = $SQLUtil->addUser($email, $password);
 if ($blnAdded) {

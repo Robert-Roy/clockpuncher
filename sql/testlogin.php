@@ -9,7 +9,7 @@ include_once 'sqlutil.php';
 $SQLUtil = new SQLUtil();
 
 //Sample user login to try
-$email = "test2@test.test";
+$email = "test@test.test";
 $password = "password";
 if($SQLUtil->isValidLogin($email, $password)){
     echo "Valid login.";

@@ -11,8 +11,8 @@ $Conn = $SQLConn->getConn();
 //Initialize SQL Tables
 try {
     $Conn->query("CREATE TABLE passwords ("
-            . "userid TEXT, "
-            . "password TEXT"
+            . "userid INT NOT NULL, "
+            . "password TEXT, "
             . "PRIMARY KEY (userid)"
             . ")");
 } catch (Exception $ex) {
