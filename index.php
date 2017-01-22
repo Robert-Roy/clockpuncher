@@ -8,17 +8,25 @@ include_once('header.php')
 
 <div class="contentdiv">
     <?php
-    if (false){
+    session_start();
+    if (isset($_SESSION['userid'])) {
         //if already logged in
+        $sessionMinutes = ini_get('session.gc_maxlifetime') / 60;
+        ?>
+        <p>You are already logged in.</p>
+        <p>Your session will last <?= $sessionMinutes ?> minutes.</p>
+        <a href="signout.php">Sign Out</a>
+        <?php
     } else if (!empty($_POST['email']) && !empty($_POST['pw'])) {
         //if login attempt
         include_once('sql/sqlutil.php');
         $SQLUtil = new SQLUtil();
         $email = $_POST['email'];
         $pw = $_POST['pw'];
-        $blnValid = $SQLUtil->isValidLogin($email, $pw);
-        if ($blnValid) {
-            echo "Valid Login";
+        $userid = $SQLUtil->tryLogin($email, $pw);
+        if ($userid !== -1) {
+            echo "You have been signed in.";
+            $_SESSION['userid'] = $userid;
         } else {
             echo showForm("Invalid Login. Please try again.");
         }
@@ -42,7 +50,7 @@ function showForm($message) {
         <br>
         <input class="crispbutton" type="submit" value="Sign In">
         <?php
-        if(!($message === "")){
+        if (!($message === "")) {
             // only print a message if there is one to print
             echo "<br><br>" . $message;
         }
