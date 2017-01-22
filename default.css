@@ -13,6 +13,10 @@ All rights reserved. Copyright Robert Roy 2016.
     font-size:1em;
     font-family: Arial;
 }
+.colorwhite {
+    color:white;
+}
+
 h2{
     font-size: 2em;
     color: #003399;
@@ -46,11 +50,6 @@ body, html{
 }
 .contentdiv{
     background: #fff;
-    position:absolute;
-    top:50%;
-    left:50%;
-    -webkit-transform:translate(-50%, -50%);
-    transform:translate(-50%, -50%);
     display:block;
     min-width: 264px;
     width:100%;
@@ -61,7 +60,16 @@ body, html{
     border-radius: 5px;
     padding:20px;
 }
-input[type="text"]{
+
+.centerxy{
+    position:absolute;
+    top:50%;
+    left:50%;
+    -webkit-transform:translate(-50%, -50%);
+    transform:translate(-50%, -50%);
+}
+
+input[type="text"], input[type="password"]{
     background: #fff;
     border-radius:5px;
     border:2px #444488 solid;
@@ -70,7 +78,27 @@ input[type="text"]{
     margin-bottom:4px;
     padding:10px;
 }
+
+/* Placeholder color changes */
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #919191;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color:    #919191;
+    opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color:    #919191;
+    opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color:    #919191;
+}
+
 input[type="submit"]{
+
+    cursor: hand;
+    cursor: pointer;
     background: #0066ff;
     font-weight: bold;
     font-size:1.2em;

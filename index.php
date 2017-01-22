@@ -6,7 +6,9 @@ All rights reserved. Copyright Robert Roy 2016.
 include_once('header.php')
 ?>
 
-<div class="contentdiv">
+
+<div class="centerxy">
+    <div class="contentdiv">
     <img id="loginbanner" src="img/sign.png"/>
     <br>
     <br>
@@ -16,13 +18,15 @@ include_once('header.php')
         
         <div><center><input type="text" name="email" autocomplete="email" placeholder="email address">
                 <!--label class="label"  for="pw">Password:</label>-->
-        <input type="text" name="pw" placeholder="password"></center><div>
+                <input type="password" name="pw" placeholder="password"></center></div>
         <br>
         <input class="crispbutton" type="submit" value="Sign In">
-        
     </form>
+    </div>
+    <br>
+    <a class="colorwhite">Don't have an account? </a>
+    <a class="colorwhite" href="index.php">Sign up.</a>
 </div>
-
 <?php
 include_once('footer.php')
 ?>
